@@ -1,0 +1,12 @@
+Strain-Stress Data Analysis
+
+File: /home/epw/Nitinol/strain_stress_data.csv
+         strain      stress
+count  5.000000    5.000000
+mean   0.030000  300.000000
+std    0.015811  158.113883
+min    0.010000  100.000000
+25%    0.020000  200.000000
+50%    0.030000  300.000000
+75%    0.040000  400.000000
+max    0.050000  500.000000

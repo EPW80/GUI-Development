@@ -3,7 +3,7 @@
 """
 This module provides the DataModel class for loading and processing
 Nitinol material properties from CSV or Excel files. It also provides
-a function for creating a sample CSV file with strain and stress data.
+a function for creating a sample CSV file with complex strain and stress data.
 """
 
 import os
@@ -70,6 +70,14 @@ class DataModel:
         ):  # pylint: disable=no-member
             raise ValueError('The file must contain "strain" and "stress" columns.')
 
+        # Calculate additional material properties
+        elastic_region = self.data[self.data["strain"] <= 0.02]
+        youngs_modulus = (
+            elastic_region["stress"].iloc[-1] / elastic_region["strain"].iloc[-1]
+        )
+        ultimate_tensile_strength = self.data["stress"].max()
+
+        # Generate plot
         plt.figure()
         plt.plot(self.data["strain"], self.data["stress"], label="Stress-Strain Curve")
         plt.xlabel("Strain")
@@ -80,27 +88,37 @@ class DataModel:
         self.plot_path = os.path.splitext(file_path)[0] + "_plot.png"
         plt.savefig(self.plot_path)
 
+        # Save results
         self.text_output_path = os.path.splitext(file_path)[0] + "_results.txt"
         with open(self.text_output_path, "w", encoding="utf-8") as file:
             file.write(f"Strain-Stress Data Analysis\n\nFile: {file_path}\n")
             file.write(self.data.describe().to_string())
+            file.write("\n\nMaterial Properties:\n")
+            file.write(f"Young's Modulus: {youngs_modulus:.2f} MPa\n")
+            file.write(
+                f"Ultimate Tensile Strength: {ultimate_tensile_strength:.2f} MPa\n"
+            )
 
         return self.plot_path, self.text_output_path
 
 
-def create_sample_csv(file_path="strain_stress_data.csv"):
+def create_sample_csv(file_path="complex_strain_stress_data.csv"):
     """
-    Create a sample CSV file with strain and stress data.
+    Create a sample CSV file with complex strain and stress data.
 
     Parameters
     ----------
     file_path : str
         The path to the file to save
     """
+    # Generate synthetic complex stress-strain data
+    strain = [0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.15, 0.2]
+    stress = [0, 150, 300, 400, 500, 550, 540, 530, 520, 510, 500, 450, 400]
+
     # Create a dictionary with data
     data = {
-        "strain": [0.01, 0.02, 0.03, 0.04, 0.05],
-        "stress": [100, 200, 300, 400, 500],
+        "strain": strain,
+        "stress": stress,
     }
 
     # Convert the dictionary to a DataFrame

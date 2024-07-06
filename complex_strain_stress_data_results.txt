@@ -1,0 +1,16 @@
+Strain-Stress Data Analysis
+
+File: /home/epw/Nitinol/complex_strain_stress_data.csv
+          strain      stress
+count  13.000000   13.000000
+mean    0.069231  411.538462
+std     0.056783  168.020145
+min     0.000000    0.000000
+25%     0.030000  400.000000
+50%     0.060000  500.000000
+75%     0.090000  520.000000
+max     0.200000  550.000000
+
+Material Properties:
+Young's Modulus: 15000.00 MPa
+Ultimate Tensile Strength: 550.00 MPa

@@ -79,6 +79,10 @@ python3 main.py
 - controller.py: Contains the DataController class which mediates between the model and the view.
 - requirements.txt: Lists the required Python packages.
 
+### Demo
+
+[loom](https://www.loom.com/share/159a28684c764c09a790f1d7cfbfe3d9?sid=3bc822d0-e612-49c5-9a34-7a9408810655)
+
 ### Contributing
 
 Contributions are welcome! Please submit a pull request or open an issue to discuss any changes or improvements.
